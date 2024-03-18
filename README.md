@@ -150,3 +150,53 @@ Or more generically as:
 - `Gamepad.current.buttonEast`
 - `Gamepad.current.buttonWest`
 
+## Action input
+
+Like the old input system, you can map both keyboard and gamepad inputs to named actions, and read those inputs in your code instead. This creates an abstraction that allows you to re-map inputs without needing to later change your code.
+
+Remove the `MoveDirectGamepadInput` script and make a new script `JumpActionInput.cs`:
+
+```cs
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody))]
+public class JumpActionInput : MonoBehaviour
+{
+    public Rigidbody body;
+    public InputAction jump;
+
+    void Reset()
+    {
+        body = GetComponent<Rigidbody>();
+    }
+
+    void OnEnable()
+    {
+        jump.Enable();
+    }
+
+    void OnDisable()
+    {
+        jump.Disable();
+    }
+
+    void Update()
+    {
+        if (jump.triggered)
+        {
+            body.AddForce(Vector3.up * 10, ForceMode.Impulse);
+        }
+    }
+}
+```
+
+Add this component to the Sphere object. You will notice a new slot for the jump action:
+
+![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/df5957df-f3c3-460b-84c9-1b1bcb1c1738)
+
+To bind a keyboard or gamepad input to this action, click on the `+` button on the right and choose `Add Binding`:
+
+![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/ff64c5cf-db43-4bdc-8905-2aebdbed7cb8)
+
+Double click on the new binding to assign it to an input, either a keyboard key, or a gamepad button. The editor interface for this is a bit buggy but will hopefully be fixed in newer versions. You can add as many alternative bindings as you wish. When you are happy, click the run button and try out your new inputs.
