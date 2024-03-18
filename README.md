@@ -56,7 +56,7 @@ public class JumpDirectKeyboardInput : MonoBehaviour
 }
 ```
 
-Add this script to the sphere and hit the play button. Pressing the space key on the keyboard should now cause the sphere to jump upwards. This is equivalent to the old input system `GetKeyDown` functionality.
+Add this script to the sphere and hit the play button. Pressing the space key on the keyboard should now cause the sphere to jump upwards. This is equivalent to the old input system `GetKeyDown` functionality. The equivalent to the old `GetKeyUp` function is `wasReleasedThisFrame`.
 
 ### GetKey equivalent
 
@@ -97,4 +97,56 @@ public class HoverDirectKeyboardInput : MonoBehaviour
 ```
 
 Add this script to the sphere and hit play. Pressing and holding the space key should now cause the sphere to accelerate upwards. This is the equivalent to the old input system `GetKey` functionality.
+
+## Direct gamepad input
+
+In addition to directly reading the keyboard, we can directly read a connect gamepad (or any other input device.)
+
+Remove the hover script from the sphere and make a new script `MoveDirectGamepadInput.cs`:
+
+```.cs
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody))]
+public class MoveDirectGamepadInput : MonoBehaviour
+{
+    public Rigidbody body;
+
+    void Reset()
+    {
+        body = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        Vector2 move = Gamepad.current.leftStick.value;
+        body.AddForce(new Vector3(move.x, 0, move.y) * 10);
+    }
+}
+```
+
+Add this script to the sphere and press play. Now, if you connect a gamepad, you can move the sphere around using the left stick.
+
+## Other gamepad input
+
+You can also directly read the right stick with `Gamepad.current.rightStick.value` or the dpad either as a stick input or the individual buttons. Each button can be read as `isPressed`, `wasPressedThisFrame`, `wasReleasedThisFrame`, and `value` which will be the pressure applied to the button if the controller button is pressure sensative.
+
+You can also refer to buttons directly such as:
+- `Gamepad.current.aButton`
+- `Gamepad.current.bButton`
+- `Gamepad.current.xButton`
+- `Gamepad.current.yButton`
+
+Or:
+- `Gamepad.current.crossButton`
+- `Gamepad.current.circleButton`
+- `Gamepad.current.triangleButton`
+- `Gamepad.current.squareButton`
+
+Or more generically as:
+- `Gamepad.current.buttonNorth`
+- `Gamepad.current.buttonSouth`
+- `Gamepad.current.buttonEast`
+- `Gamepad.current.buttonWest`
 
