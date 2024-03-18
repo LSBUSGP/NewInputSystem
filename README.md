@@ -208,8 +208,97 @@ Double click on the new binding to assign it to an input, either a keyboard key,
 
 ### Axis action inputs
 
-Remove the JumpActionInput` component and create a new script `MoveActionInput.cs`:
+Remove the `JumpActionInput` component and create a new script `MoveActionInput.cs`:
 
 ```cs
+using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
+public class MoveActionInput : MonoBehaviour
+{
+    public Rigidbody body;
+    public InputAction move;
+    Vector2 movement;
+
+    void Reset()
+    {
+        body = GetComponent<Rigidbody>();
+    }
+
+    void OnEnable()
+    {
+        move.Enable();
+    }
+
+    void OnDisable()
+    {
+        move.Disable();
+    }
+
+    void Update()
+    {
+        movement = move.ReadValue<Vector2>();
+    }
+
+    void FixedUpdate()
+    {
+        body.AddForce(new Vector3(movement.x, 0, movement.y) * 2);
+    }
+}
 ```
+
+Add this component to the sphere and add a binding this time for the Gamepad left stick. Add another binding this time chooseing `Add Up\Down\Left\Right Composite`. With this you can bind a key to each direction. When you have assigned the bindings you want, click on the run button and test your input.
+
+## Default Action Inputs
+
+Like the old input system, the new system comes with a selection of pre-difined actions and bindings. But whereas in the old system you needed to read `"Horizontal"` and `"Vertical"` axis values separately, with the new defaults you only need to read the single action input called `Player.Move`.
+
+Remove the `MoveActionInput` component and create a new script `MoveDefaultInputAsset.cs`:
+
+```cs
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody))]
+public class MoveDefaultInputAsset : MonoBehaviour
+{
+    public Rigidbody body;
+    DefaultInputActions inputActions;
+    Vector2 movement;
+
+    void Reset()
+    {
+        body = GetComponent<Rigidbody>();
+    }
+
+    void Awake()
+    {
+        inputActions = new DefaultInputActions();
+    }
+
+    void OnEnable()
+    {
+        inputActions.Enable();
+    }
+
+    void OnDisable()
+    {
+        inputActions.Disable();
+    }
+
+    void Update()
+    {
+        movement = inputActions.Player.Move.ReadValue<Vector2>();
+    }
+
+    void FixedUpdate()
+    {
+        body.AddForce(new Vector3(movement.x, 0, movement.y) * 2);
+    }
+}
+```
+
+Add this script to the sphere object and press run. You should find that the left stick on the gamepad, the WASD keys on the keyboard, and the arrow keys on the keyboard, all move the sphere around.
+
+
