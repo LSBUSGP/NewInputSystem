@@ -161,32 +161,24 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class JumpActionInput : MonoBehaviour
+public class MoveDirectGamepadInput : MonoBehaviour
 {
     public Rigidbody body;
-    public InputAction jump;
+    Vector2 movement;
 
     void Reset()
     {
         body = GetComponent<Rigidbody>();
     }
 
-    void OnEnable()
-    {
-        jump.Enable();
-    }
-
-    void OnDisable()
-    {
-        jump.Disable();
-    }
-
     void Update()
     {
-        if (jump.triggered)
-        {
-            body.AddForce(Vector3.up * 10, ForceMode.Impulse);
-        }
+        movement = Gamepad.current.leftStick.value;
+    }
+
+    void FixedUpdate()
+    {
+        body.AddForce(new Vector3(movement.x, 0, movement.y) * 2);
     }
 }
 ```
@@ -200,3 +192,11 @@ To bind a keyboard or gamepad input to this action, click on the `+` button on t
 ![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/ff64c5cf-db43-4bdc-8905-2aebdbed7cb8)
 
 Double click on the new binding to assign it to an input, either a keyboard key, or a gamepad button. The editor interface for this is a bit buggy but will hopefully be fixed in newer versions. You can add as many alternative bindings as you wish. When you are happy, click the run button and try out your new inputs.
+
+### Axis action inputs
+
+Remove the JumpActionInput` component and create a new script `MoveActionInput.cs`:
+
+```cs
+
+```
