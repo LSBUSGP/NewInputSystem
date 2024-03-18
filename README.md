@@ -319,3 +319,24 @@ If you tick the `Generate C# Class` box, Unity will create some code for you tha
 
 The `Input Actions Asset` also adds another level of organisation for your inputs which it calls `Action Maps`. Each map is simply a collection of Input Actions. You only need one to store your actions, but you can add as many as you like. These are useful if, for example, your game controls change while you are riding a vehicle, or using different tools. Each map can be Enabled and Disabled separately. For this example, I will create one `Action Map` called `Player`. Once I have defined an action map, I can add actions to it.
 
+I will add actions for `Move` and `Jump` and bind them to controller inputs as above.
+
+Note that, when adding actions in this editor, you have an additional option to define this as a `Button` action or a `Value` action (or `Pass Through` which we will ignore here.)
+
+![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/5714d538-1142-4a7c-9ba8-c3b2e2d3e488)
+
+For the move action type we will choose `Value`, whereas for the `Jump` action we will choose `Button`. When you choose `Value` as the action type you also choose the `Control Type` of the value and in this case we want the input as a `Vector2`.
+
+When you have created an bound your actions, it should look like this:
+
+![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/68da388d-58da-4342-970b-f070792c1828)
+
+You need to explicity click the `Save Asset` button to save your changes. This also generates the C# file `GameControls.cs` if you have chosen that option.
+
+Finally, we can add these controls to our object. Remove the `MoveDefaultInputAsset` component and add a new script `MoveCustomInputAsset.cs`:
+
+```cs
+
+```
+
+
