@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class MoveDirectGamepadInput : MonoBehaviour
+public class CustomPlayerInput : MonoBehaviour
 {
     public Rigidbody body;
     Vector2 movement;
@@ -12,9 +12,14 @@ public class MoveDirectGamepadInput : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void OnMove(InputValue value)
     {
-        movement = Gamepad.current.leftStick.value;
+        movement = value.Get<Vector2>();
+    }
+
+    void OnJump()
+    {
+        body.AddForce(Vector3.up * 10, ForceMode.Impulse);
     }
 
     void FixedUpdate()

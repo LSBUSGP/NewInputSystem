@@ -2,9 +2,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class MoveDirectGamepadInput : MonoBehaviour
+public class MoveActionInput : MonoBehaviour
 {
     public Rigidbody body;
+    public InputAction move;
     Vector2 movement;
 
     void Reset()
@@ -12,9 +13,19 @@ public class MoveDirectGamepadInput : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
+    void OnEnable()
+    {
+        move.Enable();
+    }
+
+    void OnDisable()
+    {
+        move.Disable();
+    }
+
     void Update()
     {
-        movement = Gamepad.current.leftStick.value;
+        movement = move.ReadValue<Vector2>();
     }
 
     void FixedUpdate()
