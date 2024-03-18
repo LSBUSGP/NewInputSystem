@@ -301,4 +301,21 @@ public class MoveDefaultInputAsset : MonoBehaviour
 
 Add this script to the sphere object and press run. You should find that the left stick on the gamepad, the WASD keys on the keyboard, and the arrow keys on the keyboard, all move the sphere around.
 
+## Custom Action Inputs
+
+With the new input system, you can create an asset to hold all of your actions and input control bindings separately from your game objects. This helps to keep your code and data organised and means that all of your controls can be managed in one location. To create a custom action input asset, right click in your project window and choose `Input Actions`. You can name this asset anything that makes sense for your game. I will use `GameControls`.
+
+Once created, double clicking this box will open the Input Actions editor window:
+
+![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/370c4ddb-787e-4ee4-84fe-18cfb9769ade)
+
+Here you can create and store the input actions for your game. Also in the `Inspector`, while this asset is selected, you will see this option:
+
+![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/5c5c1de8-da24-4864-abdb-e0ed76226f31)
+
+If you tick the `Generate C# Class` box, Unity will create some code for you that directly interacts with this asset.
+
+![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/99bb0328-8c2c-4fb7-bbcb-51add72a319e)
+
+The `Input Actions Asset` also adds another level of organisation for your inputs which it calls `Action Maps`. Each map is simply a collection of Input Actions. You only need one to store your actions, but you can add as many as you like. These are useful if, for example, your game controls change while you are riding a vehicle, or using different tools. Each map can be Enabled and Disabled separately. For this example, I will create one `Action Map` called `Player`. Once I have defined an action map, I can add actions to it.
 
