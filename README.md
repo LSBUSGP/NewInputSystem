@@ -135,7 +135,7 @@ Add this script to the sphere and press play. Now, if you connect a gamepad, you
 
 ## Other gamepad input
 
-You can also directly read the right stick with `Gamepad.current.rightStick.value` or the dpad either as a stick input or the individual buttons. Each button can be read as `isPressed`, `wasPressedThisFrame`, `wasReleasedThisFrame`, and `value` which will be the pressure applied to the button if the controller button is pressure sensative.
+You can also directly read the right stick with `Gamepad.current.rightStick.value` or the dpad either as a stick input or the individual buttons. Each button can be read as `isPressed`, `wasPressedThisFrame`, `wasReleasedThisFrame`, and `value` which will be the pressure applied to the button if the controller button is pressure sensitive.
 
 You can also refer to buttons directly such as:
 - `Gamepad.current.aButton`
@@ -248,11 +248,11 @@ public class MoveActionInput : MonoBehaviour
 }
 ```
 
-Add this component to the sphere and add a binding this time for the Gamepad left stick. Add another binding this time chooseing `Add Up\Down\Left\Right Composite`. With this you can bind a key to each direction. When you have assigned the bindings you want, click on the run button and test your input.
+Add this component to the sphere and add a binding this time for the Gamepad left stick. Add another binding this time choosing `Add Up\Down\Left\Right Composite`. With this you can bind a key to each direction. When you have assigned the bindings you want, click on the run button and test your input.
 
 ## Default Action Inputs
 
-Like the old input system, the new system comes with a selection of pre-difined actions and bindings. But whereas in the old system you needed to read `"Horizontal"` and `"Vertical"` axis values separately, with the new defaults you only need to read the single action input called `Player.Move`.
+Like the old input system, the new system comes with a selection of pre-defined actions and bindings. But whereas in the old system you needed to read `"Horizontal"` and `"Vertical"` axis values separately, with the new defaults you only need to read the single action input called `Player.Move`.
 
 Remove the `MoveActionInput` component and create a new script `MoveDefaultInputAsset.cs`:
 
@@ -331,7 +331,7 @@ When you have created an bound your actions, it should look like this:
 
 ![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/68da388d-58da-4342-970b-f070792c1828)
 
-You need to explicity click the `Save Asset` button to save your changes. This also generates the C# file `GameControls.cs` if you have chosen that option.
+You need to explicitly click the `Save Asset` button to save your changes. This also generates the C# file `GameControls.cs` if you have chosen that option.
 
 Finally, we can add these controls to our object. Remove the `MoveDefaultInputAsset` component and add a new script `CustomInputAsset.cs`:
 
