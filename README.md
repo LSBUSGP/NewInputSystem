@@ -333,7 +333,7 @@ When you have created an bound your actions, it should look like this:
 
 You need to explicity click the `Save Asset` button to save your changes. This also generates the C# file `GameControls.cs` if you have chosen that option.
 
-Finally, we can add these controls to our object. Remove the `MoveDefaultInputAsset` component and add a new script `MoveCustomInputAsset.cs`:
+Finally, we can add these controls to our object. Remove the `MoveDefaultInputAsset` component and add a new script `CustomInputAsset.cs`:
 
 ```cs
 using UnityEngine;
@@ -385,3 +385,44 @@ Put this new script on your sphere object and run. You should find that your map
 
 ## PlayerInput
 
+The `PlayerInput` component provides yet another abstraction. This time it is to do with mapping multiple controllers to multiple players. Each `PlayerInput` component represents 1 player and each will be assigned one of the possible controllers.
+
+Remove the `CustomInputAsset` component from the sphere and create a new script `CustomPlayerInput.cs`:
+
+```cs
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody))]
+public class CustomPlayerInput : MonoBehaviour
+{
+    public Rigidbody body;
+    Vector2 movement;
+
+    void Reset()
+    {
+        body = GetComponent<Rigidbody>();
+    }
+
+    void OnMove(InputValue value)
+    {
+        movement = value.Get<Vector2>();
+    }
+
+    void OnJump()
+    {
+        body.AddForce(Vector3.up * 10, ForceMode.Impulse);
+    }
+
+    void FixedUpdate()
+    {
+        body.AddForce(new Vector3(movement.x, 0, movement.y) * 2);
+    }
+}
+```
+
+Add this component to the sphere and also the `PlayerInput` component. In the `PlayerInput` component in the `Inspector` set `GameControls` as the `Actions` entry:
+
+![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/da3f669a-f807-4eb5-bb75-117fff707d2a)
+
+Now press run and your sphere should once again be controllable with your input bindings.
