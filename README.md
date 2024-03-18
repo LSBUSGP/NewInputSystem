@@ -6,21 +6,21 @@ How to setup and use the new Unity input system
 
 First switch on the new input system in the `Project Settings`. Go to the `Edit` menu, and choose `Project Settings`. Then click on the `Player` category and find the `Active Input Handling` entry in the `Configuration` section. Now click on the `Input System Package (New)` option.
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/0a25915a-e05e-410b-b4ad-084461cefb49)
+![the project settings window](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/0a25915a-e05e-410b-b4ad-084461cefb49)
 
 After you have done this, a dialog box will pop up:
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/fdf6dc2c-b506-4b64-a740-9c1ae1f3d2d6)
+![restart dialog box](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/fdf6dc2c-b506-4b64-a740-9c1ae1f3d2d6)
 
 Click `Apply` and then your project will close itself and open again.
 
 Before you can start using the new input system, you need to import the package. You can do this by opening the package manager, clicking on the `Packages: In Project` button, and choosing `Unity Registry`:
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/392d6ee9-2e61-40d3-9978-ebcd6965d705)
+![package manager window](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/392d6ee9-2e61-40d3-9978-ebcd6965d705)
 
 Now, if you type `Input` into the search box, it should find the `Input System` package which you can install by clicking on the `Install` button.
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/ba57ac21-6d96-418e-97d5-7fa6ce29e534)
+![package manager input package](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/ba57ac21-6d96-418e-97d5-7fa6ce29e534)
 
 ## Direct keyboard input
 
@@ -100,7 +100,7 @@ Add this script to the sphere and hit play. Pressing and holding the space key s
 
 ## Direct gamepad input
 
-In addition to directly reading the keyboard, we can directly read a connect gamepad (or any other input device.)
+In addition to directly reading the keyboard, we can directly read a connected gamepad (or any other input device.)
 
 Remove the hover script from the sphere and make a new script `MoveDirectGamepadInput.cs`:
 
@@ -198,11 +198,11 @@ public class JumpActionInput : MonoBehaviour
 
 Add this component to the Sphere object. You will notice a new slot for the jump action:
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/df5957df-f3c3-460b-84c9-1b1bcb1c1738)
+![jump action input component](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/df5957df-f3c3-460b-84c9-1b1bcb1c1738)
 
 To bind a keyboard or gamepad input to this action, click on the `+` button on the right and choose `Add Binding`:
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/ff64c5cf-db43-4bdc-8905-2aebdbed7cb8)
+![type of binding selection](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/ff64c5cf-db43-4bdc-8905-2aebdbed7cb8)
 
 Double click on the new binding to assign it to an input, either a keyboard key, or a gamepad button. The editor interface for this is a bit buggy but will hopefully be fixed in newer versions. You can add as many alternative bindings as you wish. When you are happy, click the run button and try out your new inputs.
 
@@ -307,15 +307,15 @@ With the new input system, you can create an asset to hold all of your actions a
 
 Once created, double clicking this box will open the Input Actions editor window:
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/370c4ddb-787e-4ee4-84fe-18cfb9769ade)
+![input actions editor window](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/370c4ddb-787e-4ee4-84fe-18cfb9769ade)
 
 Here you can create and store the input actions for your game. Also in the `Inspector`, while this asset is selected, you will see this option:
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/5c5c1de8-da24-4864-abdb-e0ed76226f31)
+![input actions inspector window](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/5c5c1de8-da24-4864-abdb-e0ed76226f31)
 
 If you tick the `Generate C# Class` box, Unity will create some code for you that directly interacts with this asset.
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/99bb0328-8c2c-4fb7-bbcb-51add72a319e)
+![generate C# class options](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/99bb0328-8c2c-4fb7-bbcb-51add72a319e)
 
 The `Input Actions Asset` also adds another level of organisation for your inputs which it calls `Action Maps`. Each map is simply a collection of Input Actions. You only need one to store your actions, but you can add as many as you like. These are useful if, for example, your game controls change while you are riding a vehicle, or using different tools. Each map can be Enabled and Disabled separately. For this example, I will create one `Action Map` called `Player`. Once I have defined an action map, I can add actions to it.
 
@@ -323,13 +323,13 @@ I will add actions for `Move` and `Jump` and bind them to controller inputs as a
 
 Note that, when adding actions in this editor, you have an additional option to define this as a `Button` action or a `Value` action (or `Pass Through` which we will ignore here.)
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/5714d538-1142-4a7c-9ba8-c3b2e2d3e488)
+![action type selector](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/5714d538-1142-4a7c-9ba8-c3b2e2d3e488)
 
 For the move action type we will choose `Value`, whereas for the `Jump` action we will choose `Button`. When you choose `Value` as the action type you also choose the `Control Type` of the value and in this case we want the input as a `Vector2`.
 
 When you have created an bound your actions, it should look like this:
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/68da388d-58da-4342-970b-f070792c1828)
+![complete set of action mappings](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/68da388d-58da-4342-970b-f070792c1828)
 
 You need to explicitly click the `Save Asset` button to save your changes. This also generates the C# file `GameControls.cs` if you have chosen that option.
 
@@ -423,6 +423,6 @@ public class CustomPlayerInput : MonoBehaviour
 
 Add this component to the sphere and also the `PlayerInput` component. In the `PlayerInput` component in the `Inspector` set `GameControls` as the `Actions` entry:
 
-![image](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/da3f669a-f807-4eb5-bb75-117fff707d2a)
+![player input component inspector](https://github.com/LSBUSGP/NewInputSystem/assets/3679392/da3f669a-f807-4eb5-bb75-117fff707d2a)
 
 Now press run and your sphere should once again be controllable with your input bindings.
