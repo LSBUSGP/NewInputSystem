@@ -112,6 +112,7 @@ using UnityEngine.InputSystem;
 public class MoveDirectGamepadInput : MonoBehaviour
 {
     public Rigidbody body;
+    Vector2 movement;
 
     void Reset()
     {
@@ -120,8 +121,12 @@ public class MoveDirectGamepadInput : MonoBehaviour
 
     void Update()
     {
-        Vector2 move = Gamepad.current.leftStick.value;
-        body.AddForce(new Vector3(move.x, 0, move.y) * 10);
+        movement = Gamepad.current.leftStick.value;
+    }
+
+    void FixedUpdate()
+    {
+        body.AddForce(new Vector3(movement.x, 0, movement.y) * 2);
     }
 }
 ```
@@ -161,24 +166,32 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class MoveDirectGamepadInput : MonoBehaviour
+public class JumpActionInput : MonoBehaviour
 {
     public Rigidbody body;
-    Vector2 movement;
+    public InputAction jump;
 
     void Reset()
     {
         body = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void OnEnable()
     {
-        movement = Gamepad.current.leftStick.value;
+        jump.Enable();
     }
 
-    void FixedUpdate()
+    void OnDisable()
     {
-        body.AddForce(new Vector3(movement.x, 0, movement.y) * 2);
+        jump.Disable();
+    }
+
+    void Update()
+    {
+        if (jump.triggered)
+        {
+            body.AddForce(Vector3.up * 10, ForceMode.Impulse);
+        }
     }
 }
 ```
